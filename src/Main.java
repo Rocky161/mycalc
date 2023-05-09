@@ -1,14 +1,14 @@
+import org.jetbrains.annotations.NotNull;
 
 class Main{
-    public static String calc(String input){
+    public static String calc(@NotNull String input) throws Exception {
         boolean romanOrArab = false;
-        String exception = "throws Exception";
         Main romanExamination = new Main();
         Main arabToRoman = new Main();
         int result = 0;
         String[] inputSplit = input.split(" ");
         if (inputSplit.length != 3){
-            return exception;
+            throw new Exception ();
         }
         Integer firstNumber = 0;
         Integer secondNumber = 0;
@@ -21,12 +21,12 @@ class Main{
                 secondNumber = romanExamination.romanToArab(inputSplit[2]);
                 romanOrArab = true;
             } catch (NumberFormatException ex) {
-                return exception;
+
             }
         }
 
         if ((firstNumber < 1) || (firstNumber > 10) || (secondNumber < 1) || (secondNumber > 10)){
-            return exception;
+            throw new Exception ();
         }
 
         String sign = inputSplit[1];
@@ -36,7 +36,7 @@ class Main{
             case "*" -> result = firstNumber * secondNumber;
             case "/" -> result = firstNumber / secondNumber;
             default -> {
-                return exception;
+
             }
         }
 
@@ -44,7 +44,7 @@ class Main{
 
         if (romanOrArab){
             if(result < 1){
-                return exception;
+                throw new Exception ();
             } else {
                 output = arabToRoman.arabToRome(result);
             }
